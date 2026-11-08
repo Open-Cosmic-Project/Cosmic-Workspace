@@ -1,29 +1,13 @@
 [workspace]
 resolver = "2"
-members = [
-  "libs/cosmic-core",
-  "libs/cosmic-usb",
-  "core/cinitd",
-  "core/kernel.root",
-  "core/clauncher",
-  "core/cdevd",
-  "daemons/clogd",
-  "daemons/cnotifd",
-  "daemons/cpushd",
-  "daemons/cbrokerd",
-  "daemons/cpowerd",
-  "daemons/csettingsd",
-  "daemons/cupdated",
-  "daemons/cfronterad",
-  "ui/phanteonwm",
-  "ui/cboard",
-  "ui/cosmic-splash",
-  "pkg/sps",
-  "tools/cosmic-flash",
-  "tools/cosmic-repo",
-  #   "tools/cad",
-  "tools/fastboot",
-  "sdk/cosmic-sdk",
+members = ["core/*", "daemons/*", "ui/*", "libs/*", "pkg/*", "sdk/*", "tools/*"]
+# Carpetas que no son crates de Rust (o que aún no compilan)
+exclude = [
+  "core/corchd",        # Go
+  "ui/creationde",      # C++ / CMake
+  "tools/bin",          # binarios compilados
+  "tools/cosmic-build", # Go y C++
+  "tools/cad",          # comentado hasta que compile
 ]
 
 # Hito 1 acordado (CosmicOS v0.2.8 / 7.7)
@@ -38,10 +22,10 @@ default-members = [
 
 [workspace.package]
 version = "0.0.1"
-edition = "2024"
+edition = "2026"
 authors = ["OpenCosmicProject Contributors"]
-license = "GPL-3.0-or-later"
-repository = "https://github.com/OpenCosmicProject"
+license = "GPL-3.0,BSD,MIT,GPL-2.0,LGPL-2.1,CC0"
+repository = "https://github.com/Open-Cosmic-Project"
 
 [workspace.dependencies]
 cosmic-core = { path = "libs/cosmic-core" }
