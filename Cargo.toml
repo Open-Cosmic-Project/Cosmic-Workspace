@@ -1,6 +1,15 @@
 [workspace]
 resolver = "2"
-members = ["core/*", "daemons/*", "ui/*", "libs/*", "pkg/*", "sdk/*", "tools/*"]
+members = [
+  "core/[!.]*",
+  "daemons/[!.]*",
+  "ui/[!.]*",
+  "libs/[!.]*",
+  "pkg/[!.]*",
+  "sdk/[!.]*",
+  "tools/[!.]*",
+]
+
 # Carpetas que no son crates de Rust (o que aún no compilan)
 exclude = [
   "core/corchd",        # Go
@@ -24,7 +33,7 @@ default-members = [
 version = "0.0.1"
 edition = "2026"
 authors = ["OpenCosmicProject Contributors"]
-license = "GPL-3.0,BSD,MIT,GPL-2.0,LGPL-2.1,CC0"
+license = "GPL-3.0,BSD-3-Clause,MIT,LGPL-2.1,CC0,AGPL-3.0"
 repository = "https://github.com/Open-Cosmic-Project"
 
 [workspace.dependencies]
