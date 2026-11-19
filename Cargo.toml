@@ -13,6 +13,7 @@ members = [
 # Carpetas que no son crates de Rust (o que aún no compilan)
 exclude = [
   "core/corchd",        # Go
+  "core/csh",           # C (Custom Shell / ZSH)
   "ui/creationde",      # C++ / CMake
   "tools/bin",          # binarios compilados
   "tools/cosmic-build", # Go y C++

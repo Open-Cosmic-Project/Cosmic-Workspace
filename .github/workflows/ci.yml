@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [eventhorizon]
+  schedule:
+    - cron: "0 8 * * *"   # todas las noches, 03:00 en Colombia
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  arbol:
+    name: Descargar el árbol y comprobar
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Instalar repo y herramientas
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL https://storage.googleapis.com/git-repo-downloads/repo -o "$HOME/.local/bin/repo"
+          chmod +x "$HOME/.local/bin/repo"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          sudo apt-get update
+          sudo apt-get install -y ninja-build ccache lld
+
+      - name: Descargar el árbol (sin el kernel)
+        run: |
+          git config --global user.name "cosmic-ci"
+          git config --global user.email "ci@users.noreply.github.com"
+          git config --global color.ui false
+          mkdir tree && cd tree
+          repo init -u https://github.com/Open-Cosmic-Project/Cosmic-Manifest.git \
+            -b eventhorizon -g "desktop-dev,-kernel" --no-clone-bundle
+          repo sync -j4 -c --no-tags --no-clone-bundle
+
+      - name: cargo check de todo el workspace
+        working-directory: tree
+        run: cargo check --workspace --locked
+
+      - name: Hito 1
+        working-directory: tree
+        run: ./cosmic-build milestone1
