@@ -36,7 +36,7 @@ jobs:
           git config --global color.ui false
           mkdir tree && cd tree
           repo init -u https://github.com/Open-Cosmic-Project/Cosmic-Manifest.git \
-            -b eventhorizon -g "desktop-dev,-kernel" --no-clone-bundle
+            -b eventhorizon -g "desktop-dev" --no-clone-bundle
           repo sync -j4 -c --no-tags --no-clone-bundle
 
       - name: cargo check de todo el workspace
