@@ -18,6 +18,7 @@ exclude = [
   "tools/bin",          # binarios compilados
   "tools/cosmic-build", # Go y C++
   "tools/cad",          # comentado hasta que compile
+  "ui/theme_engine",    # Rust, más no tiene su propio Cargo.toml por el momento :D
 ]
 
 # Hito 1 acordado (CosmicOS v0.2.8 / 7.7)
