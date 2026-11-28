@@ -148,6 +148,7 @@ version = "0.0.1"
 dependencies = [
  "cosmic-core",
  "env_logger",
+ "libc",
  "log",
  "nix",
 ]
